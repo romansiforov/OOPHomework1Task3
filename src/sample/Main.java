@@ -5,30 +5,38 @@ public class Main {
 	public static void main(String[] args) {
 		Network network = new Network();
 		
-		Phone[] phones = new Phone[10];
+		Phone[] phones = new Phone[10]; 
 		
-		setPhones(phones, network);
+		phones = initPhones(phones, network);
 		
-		phones[0].initiateOutcomeCall(phones[2]);
+		network.setPhones(phones);
 		
-		phones[1].initiateOutcomeCall(phones[2]);
+		phones[0].registratePhone(network, phones[0]);
+		phones[1].registratePhone(network, phones[1]);
+		phones[2].registratePhone(network, phones[2]);
+		phones[3].registratePhone(network, phones[3]);
 		
-		phones[0].initiateOutcomeCall(phones[3]);
+		getPhoneDetails(phones);
 		
-		phones[1].initiateOutcomeCall(phones[3]);
+//		phones[0].initiateOutcomeCall("+380502987601");
+		
 		
 	}
 	
-	public static void setPhones(Phone[] phones, Network network) {
-
+	public static void getPhoneDetails(Phone[] phones) {
 		for(int i = 0; i < phones.length; i++) {
-			phones[i] = new Phone();
-			phones[i].setPhoneNumber("+38050298764"+String.valueOf(i));
-			if(i % 2 == 0) {
-				network.registratePhone(phones[i]);
-			}
-			System.out.println(phones[i].getPhoneNumber()+ " registered " + phones[i].isRegistered());
+			System.out.println(phones[i].toString());
 		}
-		System.out.println("---------------------------------");
+		System.out.println("----------------------------");
 	}
+	
+	public static Phone[] initPhones(Phone[] phones, Network network) {
+		for(int i = 0 ; i< phones.length; i++) {
+			phones[i] = new Phone("+38050298760"+i, network);
+			phones[i].setPhoneNumber("+38050298760"+i);
+//			phones[i].setNetwork(network);
+		}
+		return phones;
+	}
+
 }

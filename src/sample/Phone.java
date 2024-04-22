@@ -1,9 +1,11 @@
 package sample;
 
 public class Phone {
+
 	private String phoneNumber;
 	private boolean isRegistered;
-	
+	private Network network;
+
 	public Phone() {
 		
 	}
@@ -11,6 +13,21 @@ public class Phone {
 	public Phone(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 		this.isRegistered = false;
+		this.network = null;
+	}
+	
+	public Phone(String phoneNumber, Network network) {
+		this.phoneNumber = phoneNumber;
+		this.isRegistered = false;
+		this.network = network;
+	}
+	
+	public Network getNetwork() {
+		return network;
+	}
+
+	public void setNetwork(Network network) {
+		this.network = network;
 	}
 
 	public String getPhoneNumber() {
@@ -20,36 +37,47 @@ public class Phone {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	
 	public boolean isRegistered() {
 		return isRegistered;
+	}
+	
+	public boolean isRegistered(String phone, Network network) {
+		return network.isRegistered(phone);
 	}
 
 	public void setRegistered(boolean isRegistered) {
 		this.isRegistered = isRegistered;
 	}
-	
-	private void getIncomeCall(Phone phone) {
-		System.out.println("The income call from "+phone.getPhoneNumber()+" ...");
-		System.out.println("-----------------------------------------");
-	}
-	
-	public void initiateOutcomeCall(Phone phoneToCall) {
 
-		if(!this.isRegistered()) {
-			System.out.println("The outcome call is not possible. Your phone "+this.getPhoneNumber()+" is not registered");
-			return;
-		}
-		if(!phoneToCall.isRegistered()) {
-			System.out.println("The call can not be recieved. Abonent phone "+phoneToCall.getPhoneNumber()+" is not registered");
-			return;
-		}
-		
-		if(this.isRegistered() && phoneToCall.isRegistered()) {
-			System.out.println("Calling to "+phoneToCall.getPhoneNumber()+" ...");
-			phoneToCall.getIncomeCall(this);
-		}
-		
+	public void registratePhone(Network operator, Phone phone) {
+		operator.addPhoneToNetwork(phone);
 	}
 	
+	private void getIncomeCall(String phone) {
+		System.out.println("The "+phone+" is calling you...");
+	}
+	
+
+	public void initiateOutcomeCall(String phoneToCall) {
+		if(isRegistered() && isRegistered(phoneToCall, network)) {
+			System.out.println("Calling to "+phoneToCall);
+			this.getIncomeCall(this.getPhoneNumber());
+		}
+		
+		if(!this.isRegistered()) {
+			System.out.println("The phone "+this.getPhoneNumber()+" isn't registered in the network");
+		}
+		if(!network.isRegistered(phoneToCall)) {
+			 System.out.println("You can not initiate a call to a number "+phoneToCall+" because it's not registered");
+		 }
+
+	}
+
+	@Override
+	public String toString() {
+		return "Phone [phoneNumber=" + phoneNumber + ", isRegistered=" + isRegistered + ", network=" + network + "]";
+	}
+
+
 }
