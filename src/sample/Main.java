@@ -3,40 +3,29 @@ package sample;
 public class Main {
 
 	public static void main(String[] args) {
-		Network network = new Network();
+		Network network = new Network("Kyivstar");
 		
-		Phone[] phones = new Phone[10]; 
+		Phone phone1 = new Phone("+380502987600", network);
+		Phone phone2 = new Phone("+380502987601", network);
+		Phone phone3 = new Phone("+380502987602", network);
+		Phone phone4 = new Phone("+380502987603", network);
+		Phone phone5 = new Phone("+380502987604", network);
 		
-		phones = initPhones(phones, network);
+		phone1.registratePhone();
+		phone2.registratePhone();
+		phone3.registratePhone();
 		
-		network.setPhones(phones);
+		phone1.initiateOutcomeCall("+380502987601");
 		
-		phones[0].registratePhone(network, phones[0]);
-		phones[1].registratePhone(network, phones[1]);
-		phones[2].registratePhone(network, phones[2]);
-		phones[3].registratePhone(network, phones[3]);
+		phone2.initiateOutcomeCall("+380502987604");
 		
-		getPhoneDetails(phones);
+		phone5.initiateOutcomeCall("+380502987600");
 		
-//		phones[0].initiateOutcomeCall("+380502987601");
+		phone3.initiateOutcomeCall("+380502987600");
+		
+		phone3.initiateOutcomeCall("+380502987602");
 		
 		
-	}
-	
-	public static void getPhoneDetails(Phone[] phones) {
-		for(int i = 0; i < phones.length; i++) {
-			System.out.println(phones[i].toString());
-		}
-		System.out.println("----------------------------");
-	}
-	
-	public static Phone[] initPhones(Phone[] phones, Network network) {
-		for(int i = 0 ; i< phones.length; i++) {
-			phones[i] = new Phone("+38050298760"+i, network);
-			phones[i].setPhoneNumber("+38050298760"+i);
-//			phones[i].setNetwork(network);
-		}
-		return phones;
 	}
 
 }

@@ -50,33 +50,40 @@ public class Phone {
 		this.isRegistered = isRegistered;
 	}
 
-	public void registratePhone(Network operator, Phone phone) {
-		operator.addPhoneToNetwork(phone);
+	public void registratePhone() {
+		network.addPhoneToNetwork(this);
 	}
 	
 	private void getIncomeCall(String phone) {
 		System.out.println("The "+phone+" is calling you...");
+		System.out.println("-------------------------------");
 	}
 	
 
 	public void initiateOutcomeCall(String phoneToCall) {
-		if(isRegistered() && isRegistered(phoneToCall, network)) {
+		if(isRegistered() && isRegistered(phoneToCall, network)
+				&& !this.getPhoneNumber().equals(phoneToCall)) {
 			System.out.println("Calling to "+phoneToCall);
 			this.getIncomeCall(this.getPhoneNumber());
 		}
 		
 		if(!this.isRegistered()) {
-			System.out.println("The phone "+this.getPhoneNumber()+" isn't registered in the network");
+			System.out.println("Your phone "+this.getPhoneNumber()+" isn't registered in the network");
+			System.out.println("-------------------------------");
 		}
 		if(!network.isRegistered(phoneToCall)) {
-			 System.out.println("You can not initiate a call to a number "+phoneToCall+" because it's not registered");
+			System.out.println("You can not initiate a call to a number "+phoneToCall+" because it's not registered");
+			System.out.println("-------------------------------");
 		 }
+		if(this.getPhoneNumber().equals(phoneToCall)) {
+			System.out.println("Hey! You can not call yourself ;-)");
+		}
 
 	}
 
 	@Override
 	public String toString() {
-		return "Phone [phoneNumber=" + phoneNumber + ", isRegistered=" + isRegistered + ", network=" + network + "]";
+		return "Phone [phoneNumber=" + phoneNumber + ", isRegistered=" + isRegistered + ", network=" + network.getNetworkName() + "]";
 	}
 
 
