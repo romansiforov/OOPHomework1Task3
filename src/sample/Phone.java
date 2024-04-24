@@ -70,7 +70,7 @@ public class Phone {
 			System.out.println("Calling to "+phoneToCall);
 			
 			Phone abonentPhone = getPhoneByNumber(phoneToCall);
-			abonentPhone.getIncomeCall(this.getPhoneNumber());
+			abonentPhone.getIncomeCall(phoneNumber);
 		}
 		
 		if(!this.isRegistered()) {
