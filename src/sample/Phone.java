@@ -45,6 +45,10 @@ public class Phone {
 	public boolean isRegistered(String phone, Network network) {
 		return network.isRegistered(phone);
 	}
+	
+	public Phone getPhoneByNumber(String phone) {
+		return network.getPhone(phone);
+	}
 
 	public void setRegistered(boolean isRegistered) {
 		this.isRegistered = isRegistered;
@@ -64,7 +68,9 @@ public class Phone {
 		if(isRegistered() && isRegistered(phoneToCall, network)
 				&& !this.getPhoneNumber().equals(phoneToCall)) {
 			System.out.println("Calling to "+phoneToCall);
-			this.getIncomeCall(this.getPhoneNumber());
+			
+			Phone abonentPhone = getPhoneByNumber(phoneToCall);
+			abonentPhone.getIncomeCall(this.getPhoneNumber());
 		}
 		
 		if(!this.isRegistered()) {

@@ -46,6 +46,15 @@ public class Network {
 		
 		 phone.setRegistered(true);
 	 }
+	
+	public Phone getPhone(String phone) {
+		for(int i = 0; i < phones.length; i++) {
+			if(phones[i]!= null && phones[i].getPhoneNumber().equals(phone)) {
+				return phones[i];
+			}
+		}
+		return null;
+	}
 	 
 	 public boolean isRegistered(String  phone) {
 		 for(int i = 0; i < phones.length; i++) {
